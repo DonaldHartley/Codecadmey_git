@@ -5,9 +5,9 @@ def cs_service_bot():
     [2] Existing Customer \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if user_response == 1:
+    if user_response == "1":
         new_customer()
-    elif user_response == 2:
+    elif user_response == "2":
         existing_customer()
     else:
         print("Sorry, we did not understand your selection.")
@@ -20,11 +20,11 @@ def cs_service_bot():
     [3] Speak to a support representative \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if user_support_response == 1:
+    if user_support_response == "1":
         television_support()
-    elif user_support_response == 2:
+    elif user_support_response == "2":
         internet_support()
-    elif user_support_response == 3:
+    elif user_support_response == "3":
         live_rep("support")
     else:
         print("Sorry, we did not understand your selection.")
@@ -37,11 +37,11 @@ def new_customer():
     [3] Speak to a sales representative. \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if new_user_response == 1:
+    if new_user_response == "1":
         sign_up()
-    elif new_user_response == 2:
+    elif new_user_response == "2":
         home_visit()
-    elif new_user_response == 3:
+    elif new_user_response == "3":
         live_rep("sales")
     else:
         print("Sorry, we did not understand your selection.")
@@ -55,17 +55,17 @@ def television_support():
     [4] Other issues. \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if user_tv_response == 1:
+    if user_tv_response == "1":
         print ("Please check the channel lists at DefinitelyNotSinister.com. \n \
         If the channel you cannot access is there, please contact a live representative.")
         did_that_help()
-    elif user_tv_response == 2:
+    elif user_tv_response == "2":
         print ("Try adjusting the antenna above your television set.")
         did_that_help()
-    elif user_tv_response == 3:
+    elif user_tv_response == "3":
         print ("Is it raining outside? If so, wait until it is not raining and then try again.")
         did_that_help()
-    elif user_tv_response == 4:
+    elif user_tv_response == "4":
         live_rep("support")
     else:
         print("Sorry, we did not understand your selection.")
@@ -79,17 +79,17 @@ def internet_support():
     [4] Other issues. \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if user_net_response == 1:
+    if user_net_response == "1":
         print ("Unplug your router, then plug it back in, then give it a good whack, like the Fonz.")
         did_that_help()
-    elif user_net_response == 2:
+    elif user_net_response == "2":
         print ("Make sure that all cell phones and other peoples computers \n \
         are not connected to the internet, so that you can have all the bandwidth.")
         did_that_help()
-    elif user_net_response == 3:
+    elif user_net_response == "3":
         print ("Move to a different region or install a VPN. Some areas block certain sites.")
         did_that_help()
-    elif user_net_response == 4:
+    elif user_net_response == "4":
         live_rep("support")
     else:
         print("Sorry, we did not understand your selection.")
@@ -101,9 +101,9 @@ def did_that_help():
     [2] No \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if user_help_response == 1:
+    if user_help_response == "1":
         print("Thank you and have a nice day!")
-    elif user_help_response == 2:
+    elif user_help_response == "2":
         did_that_help2()
     else:
         print("Sorry, we did not understand your selection.")
@@ -114,9 +114,9 @@ def did_that_help2 ():
         [1] To contact a live representative? \n \
         [2] Or schedule a home visit? \n \
         Please enter the number coresponding to the appropriate response.")
-    if u_h_r2 == 1:
+    if u_h_r2 == "1":
         live_rep("support")
-    elif u_h_r2 == 2:
+    elif u_h_r2 == "2":
         home_visit("support")
     else:
         print("Sorry, we did not understand your selection.")
@@ -131,15 +131,15 @@ def sign_up():
     [3] Cable \n \
     Please enter the number coresponding to the appropriate response.")
     
-    if new_user_input == 1:
+    if new_user_input == "1":
         print("You've selected the Bundle Package! \n \
         Please schedule a home visit and our technician will come and set up your new service.")
         home_visit("new install")
-    elif new_user_input == 2:
+    elif new_user_input == "2":
         print("You've selected the Internet Only Package! \n \
         Please schedule a home visit and our technician will come and set up your new service.")
         home_visit("new install")
-    elif new_user_input == 3:
+    elif new_user_input == "3":
         print("You've selected the Cable Only Package! \n \
         Please schedule a home visit and our technician will come and set up your new service.")
         home_visit("new install")
@@ -154,11 +154,11 @@ def home_visit(purpose="none"):
         [2] Exisitng service repair. \n \
         [3] Location scouting for unserviced region. \n \
         Please enter the number coresponding to the appropriate response.")
-        if purpose == 1:
+        if purpose == "1":
             home_visit("new install")
-        elif purpose == 2:
+        elif purpose == "2":
             home_visit("support")
-        elif purpose == 3:
+        elif purpose == "3":
             home_visit("scouting")
         else:
             print("Sorry, we did not understand your selection.")
