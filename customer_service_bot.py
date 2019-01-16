@@ -3,7 +3,7 @@ def cs_service_bot():
     Are you a new or existing customer? \n \
     [1] New Customer \n \
     [2] Existing Customer \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if user_response == 1:
         new_customer()
@@ -18,7 +18,7 @@ def cs_service_bot():
     [1] Television Support \n \
     [2] Internet Support \n \
     [3] Speak to a support representative \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if user_support_response == 1:
         television_support()
@@ -35,7 +35,7 @@ def new_customer():
     [1] Sign up for service. \n \
     [2] Schedule a home visit. \n \
     [3] Speak to a sales representative. \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if new_user_response == 1:
         sign_up()
@@ -53,7 +53,7 @@ def television_support():
     [2] My picture is blurry. \n \
     [3] I keep losing service. \n \
     [4] Other issues. \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if user_tv_response == 1:
         print ("Please check the channel lists at DefinitelyNotSinister.com. \n \
@@ -77,7 +77,7 @@ def internet_support():
     [2] My connection is very slow. \n \
     [3] I can't access certain sites. \n \
     [4] Other issues. \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if user_net_response == 1:
         print ("Unplug your router, then plug it back in, then give it a good whack, like the Fonz.")
@@ -99,7 +99,7 @@ def did_that_help():
     user_help_response = input("Did that resolve your problem? \n \
     [1] Yes \n \
     [2] No \n \
-    Please enter the number coresponding to the appropriate response")
+    Please enter the number coresponding to the appropriate response.")
     
     if user_help_response == 1:
         print("Thank you and have a nice day!")
@@ -113,7 +113,7 @@ def did_that_help2 ():
     u_h_p2 = input("Would you like \n \
         [1] To contact a live representative? \n \
         [2] Or schedule a home visit? \n \
-        Please enter the number coresponding to the appropriate response")
+        Please enter the number coresponding to the appropriate response.")
     if u_h_r2 == 1:
         live_rep("support")
     elif u_h_r2 == 2:
@@ -121,4 +121,52 @@ def did_that_help2 ():
     else:
         print("Sorry, we did not understand your selection.")
         did_that_help2()
+
+def sign_up():
+    new_user_response = input("Great choice, friend! \n \
+    We're excited to have you join the DNS family! \n \
+    Please select the package you are interested in signing up for. \n \
+    [1] Bundle Deal (Internet + Cable) \n \
+    [2] Internet \n \
+    [3] Cable \n \
+    Please enter the number coresponding to the appropriate response.")
+    
+    if new_user_input == 1:
+        print("You've selected the Bundle Package! \n \
+        Please schedule a home visit and our technician will come and set up your new service.")
+        home_visit("new install")
+    elif new_user_input == 2:
+        print("You've selected the Internet Only Package! \n \
+        Please schedule a home visit and our technician will come and set up your new service.")
+        home_visit("new install")
+    elif new_user_input == 3:
+        print("You've selected the Cable Only Package! \n \
+        Please schedule a home visit and our technician will come and set up your new service.")
+        home_visit("new install")
+    else:
+        print("Sorry, we did not understand your selection.")
+        sign_up()
+        
+def home_visit(purpose="none"):
+    if purpose = "none":
+        purpose = input("For what prupose are you requesting a home visit? \n \
+        [1] New service installation. \n \
+        [2] Exisitng service repair. \n \
+        [3] Location scouting for unserviced region. \n \
+        Please enter the number coresponding to the appropriate response.")
+        if purpose = 1:
+            home_visit("new install")
+        elif purpose = 2:
+            home_visit("support")
+        elif purpose = 3:
+            home_visit("scout")
+        else:
+            print("Sorry, we did not understand your selection.")
+            home_visit()
+    
+    visit_date = input(f"Please enter a date below when you are available for a \n \
+    technician to come to your home and {purpose}.")
+    print(f"Wonderful! A technical will come visit you on {visit_date}. \n \
+    Please be available between the hours of 1:00 am and 11:00 pm.")
+    return visit_date
 
