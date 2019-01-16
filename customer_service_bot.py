@@ -148,25 +148,34 @@ def sign_up():
         sign_up()
         
 def home_visit(purpose="none"):
-    if purpose = "none":
+    if purpose == "none":
         purpose = input("For what prupose are you requesting a home visit? \n \
         [1] New service installation. \n \
         [2] Exisitng service repair. \n \
         [3] Location scouting for unserviced region. \n \
         Please enter the number coresponding to the appropriate response.")
-        if purpose = 1:
+        if purpose == 1:
             home_visit("new install")
-        elif purpose = 2:
+        elif purpose == 2:
             home_visit("support")
-        elif purpose = 3:
-            home_visit("scout")
+        elif purpose == 3:
+            home_visit("scouting")
         else:
             print("Sorry, we did not understand your selection.")
             home_visit()
     
     visit_date = input(f"Please enter a date below when you are available for a \n \
-    technician to come to your home and {purpose}.")
+    technician to come to your home and provide a {purpose} visit.")
     print(f"Wonderful! A technical will come visit you on {visit_date}. \n \
     Please be available between the hours of 1:00 am and 11:00 pm.")
     return visit_date
 
+def live_rep(purpose):
+    if purpose == "sales":
+        print("Please hold while we connect you with a live sales representative. \n \
+        The wait time will be between two minutes and six hours. \n \
+        We thank you for your patience.")
+    elif purpose == "support":
+        print("Please hold while we connect you with a live support representative. \n \
+        The wait time will be between two minutes and six hours. \n \
+        We thank you for your patience")
