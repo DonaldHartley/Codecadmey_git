@@ -110,7 +110,7 @@ def did_that_help():
         did_that_help()
 
 def did_that_help2 ():
-    u_h_p2 = input("Would you like \n \
+    u_h_r2 = input("Would you like \n \
         [1] To contact a live representative? \n \
         [2] Or schedule a home visit? \n \
         Please enter the number coresponding to the appropriate response.")
