@@ -30,10 +30,6 @@ def ces_cyp_encrypt(text, offset):
             encrypted_text += alpha_u[index-offset]
     return encrypted_text
 
-vishals_tm = "vhfinmxkl atox kxgwxkxw tee hy maxlx hew vbiaxkl tl hulhexmx. px'ee atox mh kxteer lmxi ni hnk ztfx by px ptgm mh dxxi hnk fxlltzxl ltyx."
-for i in range(1,26):
-    print(i, ces_cyp_decrypt(vishals_tm,i))
-
 def vig_cyp_decrypt(text, keyword):
     alpha_l = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     alpha_u = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
