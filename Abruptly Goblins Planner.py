@@ -9,10 +9,9 @@ def build_daily_frequency_table():
     return {'Sunday':0,'Monday':0,'Tuesday':0,'Wednesday':0,'Thursday':0,'Friday':0,'Saturday':0}
 
 def calculate_availability(possible_players, available_frequency):
-    for i in range(0,len(possible_players)-1):
-        for name, days in possible_players[i].items():
-            for day in days:
-                available_frequency[day] += 1 
+    for gamer in possible_players:
+        for day in gamer['availability']:
+            available_frequency[day] += 1 
 
 def find_best_night(availability_lst):
     best_count = max(list(availability_lst.values()))
