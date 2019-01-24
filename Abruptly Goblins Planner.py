@@ -29,14 +29,14 @@ def find_best_night(availability_lst):
 
 gamers = []
 add_gamer({'name':'Kimberly Stall', 'availability':['Monday', 'Tuesday', 'Friday']}, gamers)
-add_gamer({'name':'Thomas Nelson','availability': ["Tuesday", "Saturday"]}, gamers)
+add_gamer({'name':'Thomas Nelson','availability': ["Tuesday", "Thursday", "Saturday"]}, gamers)
 add_gamer({'name':'Joyce Sellers','availability': ["Monday", "Wednesday", "Friday", "Saturday"]}, gamers)
 add_gamer({'name':'Michelle Reyes','availability': ["Wednesday", "Thursday", "Sunday"]}, gamers)
 add_gamer({'name':'Stephen Adams','availability': ["Thursday", "Saturday"]}, gamers)
 add_gamer({'name': 'Joanne Lynn', 'availability': ["Monday", "Thursday"]}, gamers)
 add_gamer({'name':'Latasha Bryan','availability': ["Monday", "Sunday"]}, gamers)
 add_gamer({'name':'Crystal Brewer','availability': ["Thursday", "Friday", "Saturday"]}, gamers)
-add_gamer({'name':'James Barnes Jr.','availability': ["Tuesday", "Wednesday", "Sunday"]}, gamers)
+add_gamer({'name':'James Barnes Jr.','availability': ["Tuesday", "Wednesday", "Thursday", "Sunday"]}, gamers)
 add_gamer({'name':'Michel Trujillo','availability': ["Monday", "Tuesday", "Wednesday"]}, gamers)
 print(gamers)
 count_availability = build_daily_frequency_table()
