@@ -1,7 +1,7 @@
 def add_gamer(gamer, lst):
     if type(gamer) == type({}):
         if 'name' in gamer.keys() and 'availability' in gamer.keys():
-            lst.append({gamer['name']: gamer['availability']})
+            lst.append({'name':gamer['name'], 'availability':gamer['availability']})
     else:
         print('fail')
 
@@ -26,6 +26,26 @@ def find_best_night(availability_lst):
             if count == best_count:
                 return [day], best_count
 
+def available_on_night(gamers, days):
+    player_lst = {}
+    for day in days[0]:
+        player_lst[day] = []
+    for day in days[0]:
+        for gamer in gamers:
+            if day in gamer['availability']:
+                player_lst[day].append(gamer['name'])
+    return player_lst
+
+def send_email(available_on_nights, game):
+    if len(list(available_on_nights.keys())) == 1:
+        for day in available_on_nights:
+            for name in available_on_nights[day]:
+                print (f"Hello {name}, a game of {game} has openingings for players on {day}")
+    elif len(list(available_on_nights.keys())) > 1:
+        #work on this later
+    else:
+        print ('Theres no players what happened?!')
+
 gamers = []
 add_gamer({'name':'Kimberly Stall', 'availability':['Monday', 'Tuesday', 'Friday']}, gamers)
 add_gamer({'name':'Thomas Nelson','availability': ["Tuesday", "Thursday", "Saturday"]}, gamers)
@@ -43,3 +63,6 @@ calculate_availability(gamers, count_availability)
 print(count_availability)
 game_night = find_best_night(count_availability)
 print (game_night)
+possible_attendees = available_on_night(gamers, game_night)
+print (possible_attendees)
+send_email(possible_attendees, "Abruptly Goblins!")
