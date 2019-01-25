@@ -37,14 +37,9 @@ def available_on_night(gamers, days):
     return player_lst
 
 def send_email(available_on_nights, game):
-    if len(list(available_on_nights.keys())) == 1:
-        for day in available_on_nights:
-            for name in available_on_nights[day]:
-                print (f"Hello {name}, a game of {game} has openingings for players on {day}")
-    elif len(list(available_on_nights.keys())) > 1:
-        #work on this later
-    else:
-        print ('Theres no players what happened?!')
+    for day in available_on_nights.keys():
+        for name in available_on_nights[day]:
+            print (f"Hello {name}, a game of {game} has openingings for players on {day}")
 
 gamers = []
 add_gamer({'name':'Kimberly Stall', 'availability':['Monday', 'Tuesday', 'Friday']}, gamers)
@@ -66,3 +61,18 @@ print (game_night)
 possible_attendees = available_on_night(gamers, game_night)
 print (possible_attendees)
 send_email(possible_attendees, "Abruptly Goblins!")
+
+unable_to_attend_best_night = []
+
+for person in gamers:
+    if person['name'] not in possible_attendees['Thursday']:
+        unable_to_attend_best_night.append(person)
+
+second_night_availability = build_daily_frequency_table()
+calculate_availability(unable_to_attend_best_night, second_night_availability)
+print(second_night_availability)
+second_night = find_best_night(second_night_availability)
+print (second_night)
+possible_attendees_second_night = available_on_night(gamers, second_night)
+print (possible_attendees_second_night)
+send_email(possible_attendees_second_night, "Abruptly Goblins!")
