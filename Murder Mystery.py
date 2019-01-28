@@ -55,11 +55,11 @@ class TextSample:
         self.average_sentence_length = get_avg_sentence_len(self.raw_text)
         self.prepared_text = prepare_text(text)
         self.word_count_frequency = build_frequency_table(self.prepared_text)
-        self.ngram_frequency = ngram_creator(self.prepared_text)
+        self.ngram_frequency = build_frequency_table(ngram_creator(self.prepared_text))
     def __repr__(self):
         return "the author {self.author} writes with an avgrage sentence length of {self.average_sentence_length} words.".format(**locals())
 
-def frequenct_compairison(dict1, dict2):
+def frequency_comparison(dict1, dict2):
     appearances = 0
     mutual_appearances = 0
     for key in dict1.keys():
@@ -76,9 +76,9 @@ def frequenct_compairison(dict1, dict2):
         elif key not in dict2.keys():
             appearances += dict1[key]
     for key in dict2.keys():
-        if key not in dict1.keys:
+        if key not in dict1.keys():
             appearances += dict2[key]
-    return mutual_appearances//appearances
+    return mutual_appearances/appearances
 
 def percent_difference(num1, num2):
     return abs(num1-num2)/((num1+num2)/2)
