@@ -59,17 +59,6 @@ class TextSample:
     def __repr__(self):
         return "the author {self.author} writes with an avgrage sentence length of {self.average_sentence_length} words.".format(**locals())
 
-murderer_sample = TextSample(murder_note, 'murderer')
-lily_sample = TextSample(lily_trebuchet_intro, 'lily')
-myrtle_sample = TextSample(myrtle_beech_intro, 'myrtle')
-gregg_sample = TextSample(gregg_t_fishy_intro, 'gregg')
-
-
-print(murderer_sample)
-print(lily_sample)
-print(myrtle_sample)
-print(gregg_sample)
-
 def frequenct_compairison(dict1, dict2):
     appearances = 0
     mutual_appearances = 0
@@ -91,4 +80,26 @@ def frequenct_compairison(dict1, dict2):
             appearances += dict2[key]
     return mutual_appearances//appearances
 
+def percent_difference(num1, num2):
+    return abs(num1-num2)/((num1+num2)/2)
 
+def find_text_similarity(txt1, txt2):
+    sentence_length_difference = percent_difference(txt1.average_sentence_length ,txt2.average_sentence_length)
+    sentence_length_similarity = round(abs(1 - sentence_length_difference)*100,2)
+    word_frequency_similarity = round(frequency_comparison(txt1.word_count_frequency, txt2.word_count_frequency)*100,2)
+    ngram_similarity = round(frequency_comparison(txt1.ngram_frequency, txt2.ngram_frequency)*100,2)
+    total_similarity_avg = (sentence_length_similarity + word_frequency_similarity + ngram_similarity)/3
+    total_similarity = round(total_similarity_avg,2)
+    print ("Sentence length similarity: {sentence_length_similarity}% \nWord frequency similarity: {word_frequency_similarity}% \nNgram similarity: {ngram_similarity}%".format(**locals()))
+    print ("{txt1.author}'s writing similarity to the {txt2.author}'s letter is {total_similarity}%\n".format(**locals()))
+    
+murderer_sample = TextSample(murder_note, 'murderer')
+lily_sample = TextSample(lily_trebuchet_intro, 'lily')
+myrtle_sample = TextSample(myrtle_beech_intro, 'myrtle')
+gregg_sample = TextSample(gregg_t_fishy_intro, 'gregg')
+
+find_text_similarity(lily_sample, murderer_sample)
+find_text_similarity(myrtle_sample, murderer_sample)
+find_text_similarity(gregg_sample, murderer_sample)
+
+print("Lily Trebuchet")
