@@ -4,94 +4,188 @@ myrtle_beech_intro = 'Salutations. My name? Myrtle. Myrtle Beech. I am a woman o
 gregg_t_fishy_intro = "A good day to you all, I am Gregg T Fishy, of the Fishy Enterprise fortune. I am 37 years young. An adventurous spirit and I've never lost my sense of childlike wonder. I do love to be in the backyard gardening and I have the most extraordinary time when I'm fishing. Fishing for what, you might ask? Why, fishing for compliments of course! I have a stunning pair of radiant blue eyes. They will pierce the soul of anyone who dare gaze upon my countenance. I quite enjoy going on long jaunts through garden paths and short walks through greenhouses. I hope that Jay will be as absolutely interesting as he appears on the television. I find that he has some of the most curious tastes in style and humor. When I'm out and about I quite enjoy hearing tales that instill in my heart of hearts the fascination that beguiles my every day life. Every fiber of my being scintillates and vascillates with extreme pleasure during one of these charming anecdotes and significantly pleases my beautiful personage. I cannot wait to enjoy being on A Brand New Jay. It certainly seems like a grand time to explore life and love."
 
 def get_avg_sentence_len (text):
-    text = text.split('.')
-    text2 = []
-    text3 = []
+    '''
+    This function takes a single text string and returns the average sentence lenght as an integer
+    '''
+    
     lst_of_sentc = []
-    for sentence in text:
-        text2 += sentence.split('?')
-    for sentence in text2:
-        text3 += sentence.split('!')
-    for sentence in text3:
-        lst_of_sentc.append(sentence.strip())
-    num_of_sentc = len(lst_of_sentc)
-    sentc_dict = {}
+    total_len = 0
     avg_len = 0
-    i = 0
-    while i < num_of_sentc-1:
-        for sentence in lst_of_sentc:
-            sentc_dict[i] = len(sentence.split(' '))
-            i += 1
-    for ind in sentc_dict.keys():
-        avg_len += sentc_dict[ind]
-    return avg_len // num_of_sentc
+    
+    #replacing other punctuation with '.' and spliting text into sentences
+    text = text.replace('?!','.').replace('?','.').replace('!','.').split('.')
+    
+    #stripping extra spaces and skipping empty strings from the end of the text
+    #created by the split method
+    for sentence in text:
+        if sentence == "":
+            pass
+        else:
+            lst_of_sentc.append(sentence.strip())
+    
+    #get the sentence length of the text
+    num_of_sentc = len(lst_of_sentc)
+    
+    #get the word length of each sentence
+    for sentence in lst_of_sentc:
+        total_len += len(sentence.split(' '))
+    
+    #calculate the average
+    avg_len = total_len // num_of_sentc
+    
+    return avg_len
 
 def prepare_text(text):
+    '''
+    this function takes a single text string and returns a list of the words in lowercase
+    preserving the difference between words like "its" and "it's"
+    '''
+    
     punct = ['.', ',', '?', '!', '"', ':', ';']
+    
+    #replaces the punctuation marks with an empty string ''
     for mark in punct:
         text = text.replace(mark, '')
-    text = text.lower()
-    word_lst = text.split(' ')
+        
+    #drops all words to lowercase and splits the string
+    word_lst = text.lower().split(' ')
+    
     return word_lst
 
 def build_frequency_table(corpus):
+    '''
+    takes a list of words and returns a dictionary
+    with the count of each unique word as 'word':count
+    '''
+    
     frequency_table = {}
+    
+    #this uses set to find the list of unique words and count each instance
+    #then save the word:count pair in the dictionary
     for word in set(corpus):
         frequency_table[word] = corpus.count(word)
+    
     return frequency_table
 
 def ngram_creator(text_lst):
+    '''
+    this function takes an ordered list of words and returns the list as 
+    two word pairs from that order ex. ['a', 'c', 'b', 'd'] would return
+    ['a c', 'c b', 'b d']
+    '''
+    
     ngram_lst = []
-    i = 0
-    for i in range(0,len(text_lst)-1):
+    
+    #this uses i as the iterator and index value to join the words into pairs
+    #-1 is used to ensure that the last pair is not a single word
+    for i in range(0,len(text_lst)-1): 
         temp = text_lst[i] + ' ' + text_lst[i+1]
         ngram_lst.append(temp)
+        
     return ngram_lst
     
 class TextSample:
+    '''
+    This is the class definition to prepair a text sample for analysis
+    this requires two arguments 
+    1 a long string to be evaluated
+    2 the name of the author
+    '''
+    
     def __init__(self, text, author):
-        self.raw_text = text
-        self.author = author
+        self.raw_text = text #this stores the raw text to be used later as needed
+        self.author = author #this stores the authors name as a string
+        
+        #this stores the average sentence length as an integer
         self.average_sentence_length = get_avg_sentence_len(self.raw_text)
-        self.prepared_text = prepare_text(text)
+        
+        #this stores a list of the words from the raw_text in order
+        self.prepared_text = prepare_text(self.raw_text)
+        
+        #this stores a dictionary of the set of unique words in the text and their count in the raw_text
         self.word_count_frequency = build_frequency_table(self.prepared_text)
+        
+        #this stores a dictionary of the set of unique two word pairs and their count in the raw_text
         self.ngram_frequency = build_frequency_table(ngram_creator(self.prepared_text))
+        
     def __repr__(self):
-        return "the author {self.author} writes with an avgrage sentence length of {self.average_sentence_length} words.".format(**locals())
+        return "The author {self.author} writes with an avgrage sentence length of {self.average_sentence_length} words.".format(**locals())
 
 def frequency_comparison(dict1, dict2):
+    '''
+    this function takes two dictionarys of word:count pairs and counts the number of mutual appearences
+    against the number total appearences (inclusive) 
+    ex. 'bath':2 and 'bath':7 >> 2 would be added to mutual, and 7 to the total
+    if the appearences are == then the value is added to both
+    additionally if a word does not appear in both dictionarys the value is added to the total
+    finally this function returns the mutual/total appearences as a float to represent the 
+    percentage similarity between the two dictionarys
+    '''
+    
     appearances = 0
     mutual_appearances = 0
-    for key in dict1.keys():
+    similarity = 0
+    
+    for key in dict1.keys(): 
         if key in dict2.keys():
-            if dict1[key] > dict2[key]:
+            #this compairs the value of the shared keys and store the values appropriately
+            if dict1[key] >= dict2[key]: 
                 mutual_appearances += dict2[key]
                 appearances += dict1[key]
             elif dict1[key] < dict2[key]:
                 mutual_appearances += dict1[key]
                 appearances += dict2[key]
-            elif dict1[key] == dict2[key]:
-                mutual_appearances += dict1[key]
-                appearances += dict2[key]
-        elif key not in dict2.keys():
+        elif key not in dict2.keys(): #checks for keys not in dict2
             appearances += dict1[key]
-    for key in dict2.keys():
+            
+    for key in dict2.keys(): #checks for keys not in dict1
         if key not in dict1.keys():
             appearances += dict2[key]
-    return mutual_appearances/appearances
+    
+    #this calculates the similarity as a float
+    similarity = mutual_appearances/appearances
+    
+    return similarity
 
 def percent_difference(num1, num2):
+    '''
+    this function calcualtes the percent difference as
+    absolute difference / average size
+    and returns it as a float
+    '''
+    
     return abs(num1-num2)/((num1+num2)/2)
 
 def find_text_similarity(txt1, txt2):
+    '''
+    this function takes two TextSample Class' and prints the 
+    sentence length, word frequency, and ngram similaritys as % to two decimal places
+    it also prints and returns the total avergage similarity
+    '''
+    
+    #this calculates the % difference of the sentence length of the avegrage sentence lengths of the two classes
     sentence_length_difference = percent_difference(txt1.average_sentence_length ,txt2.average_sentence_length)
+    
+    #this converts the difference to smiliarity of sentence length as a % to two decimal places
     sentence_length_similarity = round(abs(1 - sentence_length_difference)*100,2)
+    
+    #this calculates the similarity of word use frequency as a % to two decimal places
     word_frequency_similarity = round(frequency_comparison(txt1.word_count_frequency, txt2.word_count_frequency)*100,2)
+    
+    #this calculates the similarity of ngram use frequency as a % to two decimal places
     ngram_similarity = round(frequency_comparison(txt1.ngram_frequency, txt2.ngram_frequency)*100,2)
+    
+    #this averages the similarity of sentence length, word frequency, and ngram frequency
     total_similarity_avg = (sentence_length_similarity + word_frequency_similarity + ngram_similarity)/3
-    total_similarity = round(total_similarity_avg,2)
+    
+    #this calculates the average similarity as a % to two decimal places
+    total_similarity_percentage = round(total_similarity_avg,2)
+    
+    #these are the print statements for convienent review
     print ("Sentence length similarity: {sentence_length_similarity}% \nWord frequency similarity: {word_frequency_similarity}% \nNgram similarity: {ngram_similarity}%".format(**locals()))
     print ("{txt1.author}'s writing similarity to the {txt2.author}'s letter is {total_similarity}%\n".format(**locals()))
+    
+    return total_similarity
     
 murderer_sample = TextSample(murder_note, 'murderer')
 lily_sample = TextSample(lily_trebuchet_intro, 'lily')
