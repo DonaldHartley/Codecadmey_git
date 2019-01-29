@@ -188,12 +188,12 @@ def find_text_similarity(txt1, txt2):
     return total_similarity_percentage
     
 murderer_sample = TextSample(murder_note, 'murderer')
-lily_sample = TextSample(lily_trebuchet_intro, 'lily')
-myrtle_sample = TextSample(myrtle_beech_intro, 'myrtle')
-gregg_sample = TextSample(gregg_t_fishy_intro, 'gregg')
+lily_sample = TextSample(lily_trebuchet_intro, 'Lily Trebuchet')
+myrtle_sample = TextSample(myrtle_beech_intro, 'Myrtle Beech')
+gregg_sample = TextSample(gregg_t_fishy_intro, 'Gregg T Fishy')
 
 find_text_similarity(lily_sample, murderer_sample)
 find_text_similarity(myrtle_sample, murderer_sample)
 find_text_similarity(gregg_sample, murderer_sample)
 
-print("Lily Trebuchet")
+#need a function to return the person with the highest match percentage
