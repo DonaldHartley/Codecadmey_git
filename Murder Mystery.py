@@ -183,9 +183,9 @@ def find_text_similarity(txt1, txt2):
     
     #these are the print statements for convienent review
     print ("Sentence length similarity: {sentence_length_similarity}% \nWord frequency similarity: {word_frequency_similarity}% \nNgram similarity: {ngram_similarity}%".format(**locals()))
-    print ("{txt1.author}'s writing similarity to the {txt2.author}'s letter is {total_similarity}%\n".format(**locals()))
+    print ("{txt1.author}'s writing similarity to the {txt2.author}'s letter is {total_similarity_percentage}%\n".format(**locals()))
     
-    return total_similarity
+    return total_similarity_percentage
     
 murderer_sample = TextSample(murder_note, 'murderer')
 lily_sample = TextSample(lily_trebuchet_intro, 'lily')
