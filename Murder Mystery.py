@@ -13,7 +13,7 @@ def get_avg_sentence_len (text):
     avg_len = 0
     
     #replacing other punctuation with '.' and spliting text into sentences
-    text = text.replace('?!','.').replace('?','.').replace('!','.').split('.')
+    text = text.replace('?','.').replace('!','.').split('.')
     
     #stripping extra spaces and skipping empty strings from the end of the text
     #created by the split method
